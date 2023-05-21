@@ -1,0 +1,105 @@
+<html>
+
+    <head>
+        <title>7 Segment Digital Clock</title>
+        <link type="text/css" rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="main">
+            <div class="col-md-4 col-md-push-4">
+                <div class="title">
+                    <p class="matricNo">  <b> Matric Number: </b> ND/22/MCT/FT/010 </p>
+                    <p class="department"><b> Department: </b> Mechatronics</p>
+                    <p class="course-code"><b> Course Code: </b> COM 113 </p>
+                    <p class="course-title"> <b> Course Title:  </b> Introduction to computer to Programming  </p>
+                    <!-- <p class="lecturer"> <b> Name: </b>   </p> -->
+                </div>
+                <div class="clock-out">
+                    <div class="clock">
+                        <div class="time-bg"><span class="time">~~</span>88:88 <span id="seconds-bg">88</span> </div>
+                        <div class="time-front"><span class="time" id="sessin"></span><span id="DSEGClock"></span> <span id="seconds-front"></span></div>
+                    </div>
+                    <br>
+                    <div class="date">
+                        <!-- <div class="date-bg"></div> 88-08-2088 -->
+                        <div class="date-front" id="date"></div>
+                    </div>
+                    <div class="day">
+                        <div class="day-bg"></div> <!-- ~~~ -->
+                        <div class="day-front" id="din"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var div = document.getElementById('DSEGClock');
+            var date = document.getElementById('date');
+            var day = document.getElementById('din');
+            var seconds = document.getElementById('seconds-front');
+            var session = document.getElementById('sessin');
+            var dat = document.getElementById('date');
+
+            function time() {
+                div.innerHTML = "";
+                var d = new Date();
+                var s = d.getSeconds();
+                var m = d.getMinutes();
+                var h = d.getHours();
+                var sesn = "AM";
+
+                if(h >= 12){
+                    sesn = "PM";
+                }
+
+                if (h > 12) {
+                    h = h - 12;
+                }
+                if (h < 10) {
+                    h = "0" + h;
+                }
+                if (m < 10) {
+                    m = "0" + m;
+                }
+
+                if (h == 0) {
+                    h = 12;
+                }
+                //if (h => 12) {
+                    //sesn = "PM";
+                //}
+                //console.log(h)
+
+                if (s < 10) {
+                    s = "0" + s;
+                }
+                var mnth = d.getMonth() + 1; 
+                var date = d.getDate();
+                var year = d.getFullYear();
+                var daylist = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+                var fa_day = d.getDay();
+                fa_day = daylist[fa_day];
+
+                if (date < 10) {
+                    date = "0" + date;
+                }
+                if (mnth < 10) {
+                    mnth = "0" + 0;
+                }
+                div.innerHTML = h + ":" + m;
+                day.innerHTML = null//fa_day; I set it to null intentionally
+                seconds.innerHTML = s;
+                session.innerHTML = sesn;
+                dat.innerHTML = ""//date + "-" + mnth + "-" + year; //I don't want to set the date
+
+            }
+            //Update the second hand every 1,000 milliseceonds's time (1second)
+            setInterval(time, 1000);
+
+
+        </script>
+    </body>
+
+</html>
